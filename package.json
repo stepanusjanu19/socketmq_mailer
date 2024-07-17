@@ -1,0 +1,20 @@
+{
+  "name": "socket_mq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "nodemailer": "^6.9.14",
+    "socket.io": "^4.7.5"
+  }
+}
