@@ -11,7 +11,12 @@
     <ul id="messages"></ul>
 
     <script>
-        const socket = io();
+        const socket = io(encodeURI("http://localhost:3000"), {
+            withCredentials: true,
+            extraHeaders: {
+                "1297398129ehiqhjdhsyd81y87d1": btoa("129089018930jdskhd89129h9d")
+            }
+        });
 
         socket.on('message', (msg) => {
             const li = document.createElement('li');

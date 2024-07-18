@@ -80,12 +80,27 @@ const nodemailer = require("nodemailer");
 // const { google } = require("googleapis");
 const amqp = require('amqplib/callback_api');
 
+require('dotenv').config()
+const ALLOW_URL = process.env.ALLOW_URL.split(',');
+const RABBITMQ_URL = atob(process.env.RABBITMQ_URL); // Change if needed
+const QUEUE_NAME = 'messages';
+
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors : {
+        origin: decodeURI(atob(ALLOW_URL)),
+        allowHeaders: ["1297398129ehiqhjdhsyd81y87d1"],
+        credentials: true
+    },
+    allowRequest: (req, callback) => {
+        const nonoriginheader = req.headers.origin === undefined;
+        callback(null, nonoriginheader);
+    }
+});
 
-const RABBITMQ_URL = 'amqp://da128f28645bed7959370cd787bacaea0a0805b865f384f3eb13d14f197aefea:10d44afbb704348fe098e68ea5c96a6878ffa336a853168fbee1d9d03c7ce4e5@127.0.0.1:5672/klinik_lidwina_charitas_vhost'; // Change if needed
-const QUEUE_NAME = 'messages';
+
+
 
 // const oauth2 = google.auth.OAuth2;
 
@@ -148,14 +163,14 @@ function consumeMessages() {
                         //     accessToken: accesstoken.token
                         // },
                         auth: {
-                            user: '01yoshyosh01@gmail.com',
-                            pass: "inzk uojs vkyo oahu"
+                            user: process.env.EMAIL_USER,
+                            pass: process.env.EMAIL_PASS
                         },
                     });
 
                     const mailoptions = {
-                        from: "01yoshyosh01@gmail.com",
-                        to: "giripriyatama2@gmail.com",
+                        from: process.env.EMAIL_USER,
+                        to: process.env.TARGET_MAIL,
                         subject: "test aja",
                         text: parsejson.message,
                         html: `<h1>${parsejson.message}</h1>`

@@ -31,7 +31,7 @@ const sendMessage = (message) => {
 // Example usage
 
 var json = {
-    message: "send aja tes",
+    message: "aku sayang kamu banyak selalu love you more ❤️❤️❤️❤️❤️ muah http://stepanusjanu19.github.io/love.html 🩷🩷🩷🩷",
 }
 
 sendMessage(JSON.stringify(json));
